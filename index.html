@@ -1740,6 +1740,7 @@ body {
 <div class="petal">🍃</div>
 
 <div id="particles-js"></div>
+<audio id="bgm" src="audio.mpeg" loop preload="auto"></audio>
 
 <!-- ===============================
      ENVELOPE
@@ -2154,6 +2155,9 @@ function revealWedding() {
 
 
     envelope.classList.add('open');
+    const music = document.getElementById('bgm');
+    music.volume = 0.6;
+    music.play().catch(() => {});
 
 
     setTimeout(() => {

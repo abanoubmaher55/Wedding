@@ -2172,10 +2172,10 @@ body {
 
 </div>
 <div id="lightbox">
-    <button class="lb-close" id="lb-close">✕</button>
-    <button class="lb-nav lb-prev" id="lb-prev">‹</button>
+    <button class="lb-close" onclick="closeLightbox(event)">✕</button>
+    <button class="lb-nav lb-prev" onclick="stepImage(event, -1)">‹</button>
     <img id="lightbox-img" src="" alt="">
-    <button class="lb-nav lb-next" id="lb-next">›</button>
+    <button class="lb-nav lb-next" onclick="stepImage(event, 1)">›</button>
     <div class="lb-count" id="lb-count"></div>
 </div>
 
@@ -2256,12 +2256,52 @@ function revealWedding() {
     }, 3600);
 
 }
-document.querySelectorAll('.g-item').forEach(item => {
-    item.addEventListener('click', () => {
-        document.getElementById('lightbox-img').src =
-            item.querySelector('img').src;
-        document.getElementById('lightbox').classList.add('show');
-    });
+
+const galleryImgs = Array.from(document.querySelectorAll('.g-item img'));
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lightbox-img');
+const lbCount = document.getElementById('lb-count');
+let current = 0;
+
+function showImage(i) {
+    current = (i + galleryImgs.length) % galleryImgs.length;
+    lbImg.src = galleryImgs[current].src;
+    lbCount.innerText = (current + 1) + ' / ' + galleryImgs.length;
+}
+
+function openLightbox(i) {
+    showImage(i);
+    lb.classList.add('show');
+}
+
+function closeLightbox(e) {
+    if (e) e.stopPropagation();
+    lb.classList.remove('show');
+}
+
+function stepImage(e, dir) {
+    e.stopPropagation();
+    showImage(current + dir);
+}
+
+galleryImgs.forEach((img, i) => {
+    img.parentElement.addEventListener('click', () => openLightbox(i));
+});
+
+lb.addEventListener('click', e => {
+    if (e.target === lb) closeLightbox();
+});
+
+let startX = 0;
+
+lb.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+});
+
+lb.addEventListener('touchend', e => {
+    const diff = e.changedTouches[0].clientX - startX;
+    if (diff < -50) showImage(current + 1);
+    if (diff > 50) showImage(current - 1);
 });
 
 /* ===============================

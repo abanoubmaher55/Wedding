@@ -657,6 +657,7 @@ body {
 }
 
 
+
 /* ===============================
    HERO
 ================================ */
@@ -944,6 +945,7 @@ body {
                 0.45
             );
     }
+    
 }
 
 
@@ -1352,57 +1354,69 @@ body {
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-    max-width: 1100px;
+    gap: 14px;
+    max-width: 900px;
     margin: 0 auto;
 }
 
-.gallery-grid img {
+.g-item {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(79, 143, 128, 0.15);
+}
+
+.g-item img {
     width: 100%;
-
-    height:
-        450px;
-
-    object-fit:
-        cover;
-
-    border-radius:
-        25px;
-
-    border:
-        8px solid white;
-
-    box-shadow:
-        0 15px 35px
-        rgba(
-            79,
-            143,
-            128,
-            0.15
-        );
-
-    transition:
-        all
-        0.6s
-        ease;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
 }
 
-.gallery-grid img:hover {
-
-    transform:
-        translateY(-15px)
-        scale(1.03)
-        rotate(1deg);
-
-    box-shadow:
-        0 25px 45px
-        rgba(
-            79,
-            143,
-            128,
-            0.25
-        );
+.g-item:hover img {
+    transform: scale(1.05);
 }
+
+.zoom-icon {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--mint-deep);
+}
+
+#lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 2000;
+}
+
+#lightbox.show {
+    display: flex;
+}
+
+#lightbox img {
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 12px;
+}
+
+
+
 
 
 /* ===============================
@@ -1788,6 +1802,7 @@ body {
 
 </div>
 
+
 <!-- ===============================
      MAIN WEBSITE
 ================================ -->
@@ -2004,55 +2019,45 @@ body {
 
 <div class="gallery-grid">
 
-    <img
-        src="photo.jpg.jpeg"
-        data-aos="fade-up"
-        alt="Wedding memory"
-    >
+    <div class="g-item" data-aos="fade-up">
+        <img src="photo.jpg.jpeg" alt="Wedding memory">
+        <span class="zoom-icon">🔍</span>
+    </div>
 
-    <img
-        src="649077085_10232051936268763_8264541209206823309_n.jpg"
-        data-aos="fade-up"
-        data-aos-delay="200"
-        alt="Wedding memory"
-    >
+    <div class="g-item" data-aos="fade-up" data-aos-delay="150">
+        <img src="649077085_10232051936268763_8264541209206823309_n.jpg" alt="Wedding memory">
+        <span class="zoom-icon">🔍</span>
+    </div>
 
-    <img
-        src="7776ee2a-6553-4783-8b99-7a4e8e92bc81.jpg"
-        data-aos="fade-up"
-        data-aos-delay="400"
-        alt="Wedding memory"
-    >
-    <img
-        src="photo1.jpg"
-        data-aos="fade-up"
-        data-aos-delay="400"
-        alt="Wedding memory"
-    >
-    <img
-        src="photo2.jpg"
-        data-aos="fade-up"
-        data-aos-delay="400"
-        alt="Wedding memory"
-    >
-    <img
-        src="photo3.jpg"
-        data-aos="fade-up"
-        data-aos-delay="400"
-        alt="Wedding memory"
-    >
-    <img
-        src="photo4.jpg"
-        data-aos="fade-up"
-        data-aos-delay="400"
-        alt="Wedding memory"
-    >
-    <img
-        src="photo5.jpg"
-        data-aos="fade-up"
-        data-aos-delay="400"
-        alt="Wedding memory"
-    >
+    <div class="g-item" data-aos="fade-up">
+        <img src="7776ee2a-6553-4783-8b99-7a4e8e92bc81.jpg" alt="Wedding memory">
+        <span class="zoom-icon">🔍</span>
+    </div>
+
+    <div class="g-item" data-aos="fade-up" data-aos-delay="150">
+        <img src="photo1.jpg" alt="Wedding memory">
+        <span class="zoom-icon">🔍</span>
+    </div>
+
+    <div class="g-item" data-aos="fade-up">
+        <img src="photo2.jpg" alt="Wedding memory">
+        <span class="zoom-icon">🔍</span>
+    </div>
+
+    <div class="g-item" data-aos="fade-up" data-aos-delay="150">
+        <img src="photo3.jpg" alt="Wedding memory">
+        <span class="zoom-icon">🔍</span>
+    </div>
+
+    <div class="g-item" data-aos="fade-up">
+        <img src="photo4.jpg" alt="Wedding memory">
+        <span class="zoom-icon">🔍</span>
+    </div>
+
+    <div class="g-item" data-aos="fade-up" data-aos-delay="150">
+        <img src="photo5.jpg" alt="Wedding memory">
+        <span class="zoom-icon">🔍</span>
+    </div>
 
 </div>
 
@@ -2117,12 +2122,15 @@ body {
     #FadyAndSilvana2026 ♡
 </h3>
 <h4 class="hashtag">
-    #Antika Design♡
+    #Antika Design ♡
 </h4>
 
 
 </section>
 
+</div>
+<div id="lightbox" onclick="this.classList.remove('show')">
+    <img id="lightbox-img" src="" alt="">
 </div>
 
 <!-- ===============================
@@ -2202,7 +2210,13 @@ function revealWedding() {
     }, 3600);
 
 }
-
+document.querySelectorAll('.g-item').forEach(item => {
+    item.addEventListener('click', () => {
+        document.getElementById('lightbox-img').src =
+            item.querySelector('img').src;
+        document.getElementById('lightbox').classList.add('show');
+    });
+});
 
 /* ===============================
    COUNTDOWN
@@ -2216,7 +2230,7 @@ function revealWedding() {
 
 const target =
     new Date(
-        "October 15, 2026 18:00:00"
+        "October 15, 2026 19:00:00"
     ).getTime();
 
 

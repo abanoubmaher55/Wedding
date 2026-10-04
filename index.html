@@ -1414,7 +1414,49 @@ body {
     max-height: 90vh;
     border-radius: 12px;
 }
+.lb-nav,
+.lb-close {
+    position: absolute;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+.lb-nav {
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    font-size: 30px;
+    line-height: 1;
+    padding-bottom: 4px;
+}
+
+.lb-prev { left: 10px; }
+.lb-next { right: 10px; }
+
+.lb-close {
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+}
+
+.lb-count {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #FFFFFF;
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+}
 
 
 
@@ -2129,8 +2171,12 @@ body {
 </section>
 
 </div>
-<div id="lightbox" onclick="this.classList.remove('show')">
+<div id="lightbox">
+    <button class="lb-close" id="lb-close">✕</button>
+    <button class="lb-nav lb-prev" id="lb-prev">‹</button>
     <img id="lightbox-img" src="" alt="">
+    <button class="lb-nav lb-next" id="lb-next">›</button>
+    <div class="lb-count" id="lb-count"></div>
 </div>
 
 <!-- ===============================
